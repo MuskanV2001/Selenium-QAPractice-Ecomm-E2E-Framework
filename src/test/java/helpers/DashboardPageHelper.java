@@ -61,6 +61,7 @@ public class DashboardPageHelper extends BaseTest {
                 System.out.println("Clicked Add to Cart for product: " + product);
             }
             waitUtil.waitForElementToDisappear(dashboardPagePO.itemAddedMessage);
+            waitUtil.scrollElementIntoView(dashboardPagePO.cartIcon);
             waitUtil.waitForHeaderToBeVisible();
             waitUtil.waitForVisible(dashboardPagePO.cartIcon);
             waitUtil.waitForClickable(dashboardPagePO.cartIcon).click();

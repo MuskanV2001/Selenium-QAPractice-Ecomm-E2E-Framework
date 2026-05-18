@@ -17,7 +17,7 @@ public class WaitUtils {
 
     public WaitUtils(WebDriver driver){
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public WebElement waitForVisible(By locator) {

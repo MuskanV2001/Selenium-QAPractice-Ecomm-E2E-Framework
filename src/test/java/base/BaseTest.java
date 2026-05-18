@@ -27,6 +27,7 @@ public class BaseTest {
 
             String browser = prop.getProperty("browser");
             baseUrl = prop.getProperty("baseUrl");
+            String headless = System.getProperty("headless", "false");
 
             if(browser.equalsIgnoreCase("chrome")){
                 ChromeOptions options = new ChromeOptions();
@@ -34,8 +35,14 @@ public class BaseTest {
                 options.addArguments("--disable-save-password-bubble");
                 options.addArguments("--disable-infobars");
                 options.addArguments("--disable-extensions");
+
                 // Disable password manager
                 options.addArguments("--disable-features=PasswordLeakDetection");
+
+                if(headless.equalsIgnoreCase("true")) {
+                    options.addArguments("--headless=new");
+                    System.out.println("Running in headless mode");
+                }
 
                 Map<String, Object> prefs = new HashMap<>();
                 prefs.put("credentials_enable_service", false);

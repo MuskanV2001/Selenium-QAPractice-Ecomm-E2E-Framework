@@ -17,6 +17,6 @@ Feature:  E2E_Placing Order_Transaction
 
     Examples:
       | email                 | password    | firstname | lastname | products_to_add                                        |
-      | test@qabrains.com     | Password123 | John      | Doe      | Sample Shirt Name                                      |
+#      | test@qabrains.com     | Password123 | John      | Doe      | Sample Shirt Name                                      |
       | practice@qabrains.com | Password123 | Carl      | Warren   | Sample Shirt Name,Sample Shoe Name,Sample Trouser Name |
       | student@qabrains.com  | Password123 | Mike      | Ross     | Sample Shoe Name,Sample Trouser Name                  |

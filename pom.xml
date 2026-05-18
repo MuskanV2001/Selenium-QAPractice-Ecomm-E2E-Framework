@@ -76,5 +76,28 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>e2e_headless</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <version>3.5.4</version>
+            <configuration>
+              <properties>
+                <property>
+                  <name>headless</name>
+                  <value>true</value>
+                </property>
+              </properties>
+              <suiteXmlFiles>
+                <suiteXmlFile>E2E_Submit.xml</suiteXmlFile>
+              </suiteXmlFiles>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>
