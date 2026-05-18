@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="E2E Order Submit">
+    <parameter name="baseUrl" value="https://practice.qabrains.com/ecommerce/login"/>
+    <test name="Validate Order Submission">
+        <classes>
+            <class name = "tests.TestNGTestRunner"/>
+        </classes>
+    </test>
+</suite>
