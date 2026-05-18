@@ -87,8 +87,7 @@
             <configuration>
               <properties>
                 <property>
-                  <name>headless</name>
-                  <value>true</value>
+                  <headless>true</headless>
                 </property>
               </properties>
               <suiteXmlFiles>
