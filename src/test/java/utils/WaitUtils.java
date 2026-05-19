@@ -13,42 +13,43 @@ public class WaitUtils {
 
     public WebDriver driver;
 
-    private static WebDriverWait wait;
+    private WebDriverWait wait;
 
     public WaitUtils(WebDriver driver){
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public WebElement waitForVisible(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public WebElement waitForClickable(By locator){
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebElement element = this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block:'center', inline:'nearest'});", element
+                "arguments[0].scrollIntoView({block:'center', inline:'nearest'});", driver.findElement(locator)
         );
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        this.wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(locator)));
         return element;
     }
 
     public boolean waitForElementToDisappear(By locator){
-        return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        return this.wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
-    public void scrollElementIntoView(By locator){
+    public void scrollElementIntoView(By locator) throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView()", driver.findElement(locator));
+        js.executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});", driver.findElement(locator));
+        Thread.sleep(100);
     }
 
-    public void waitForHeaderToBeVisible(){
+    public void waitForHeaderToBeVisible() throws InterruptedException {
         System.out.println("Scrolling to the header...");
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript(
-                "document.body.scrollTop = 0;" +
-                        "document.documentElement.scrollTop = 0;"
-        );
+        js.executeScript("window.scrollTo(0,0)");
+        // Since page takes few ms to scroll - my script needs to pause to complete scrolling
+        Thread.sleep(1000);
+        scrollElementIntoView(By.cssSelector("header"));
         waitForClickable(By.cssSelector("header"));
     }
 }

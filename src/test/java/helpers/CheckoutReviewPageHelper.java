@@ -51,6 +51,7 @@ public class   CheckoutReviewPageHelper extends BaseTest {
 
     public boolean finishToSubmit(){
         try{
+            waitUtil.scrollElementIntoView(checkoutReviewPagePO.finishButton);
             waitUtil.waitForVisible(checkoutReviewPagePO.finishButton);
             waitUtil.waitForClickable(checkoutReviewPagePO.finishButton).click();
             System.out.println("Clicked Finish to submit order");

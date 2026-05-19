@@ -23,6 +23,6 @@ public class CartPagePO extends BaseTest {
 
     public WebElement addQuantityButton(String productName){
         By addQtyButtonLocator = By.xpath("//h3[text()='" + productName + "']/ancestor::div[2]/following-sibling::div/div/button[2]");
-        return waitUtil.waitForVisible(addQtyButtonLocator);
+        return waitUtil.waitForClickable(addQtyButtonLocator);
     }
 }

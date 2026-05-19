@@ -37,12 +37,17 @@ public class BaseTest {
                 options.addArguments("--disable-save-password-bubble");
                 options.addArguments("--disable-infobars");
                 options.addArguments("--disable-extensions");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-gpu");
 
                 // Disable password manager
                 options.addArguments("--disable-features=PasswordLeakDetection");
 
                 if(headless.equalsIgnoreCase("true")) {
                     options.addArguments("--headless=new");
+                    options.addArguments("--window-size=1920,1080");
+                    options.addArguments("--start-maximized");
                     System.out.println("Running in headless mode");
                 }
 

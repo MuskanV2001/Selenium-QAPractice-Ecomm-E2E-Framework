@@ -31,6 +31,7 @@ public class CheckoutInfoPageHelper extends BaseTest {
             System.out.println("Entered user's lastname: " + lastname);
             waitUtil.waitForVisible(checkoutInfoPagePO.zipcodeInput);
             System.out.println("ZipCode displayed");
+            waitUtil.scrollElementIntoView(checkoutInfoPagePO.continueButton);
             waitUtil.waitForVisible(checkoutInfoPagePO.continueButton);
             waitUtil.waitForClickable(checkoutInfoPagePO.continueButton).click();
             System.out.println("Clicked Continue button");

@@ -19,6 +19,7 @@ public class CartPageHelper extends BaseTest {
                 cartPagePO.getProductLocator(product);
                 System.out.println("Verified " + product + " in the cart");
                 cartPagePO.addQuantityButton(product).click();
+                Thread.sleep(500);
                 System.out.println("Increased Quantity for product: " + product);
             }
             return true;
@@ -31,6 +32,7 @@ public class CartPageHelper extends BaseTest {
 
     public boolean clickCheckoutButton(){
         try{
+            waitUtil.scrollElementIntoView(cartPagePO.checkoutButton);
             waitUtil.waitForVisible(cartPagePO.checkoutButton);
             waitUtil.waitForClickable(cartPagePO.checkoutButton).click();
             System.out.println("Clicked Checkout Button");

@@ -42,6 +42,8 @@ public class LoginPageHelper extends BaseTest {
             System.out.println("Entered email id: " + email);
             waitUtil.waitForVisible(loginPagePO.passwordInput).sendKeys(password);
             System.out.println("Entered password: " + password);
+            Thread.sleep(1000);
+            waitUtil.scrollElementIntoView(loginPagePO.loginButton);
             waitUtil.waitForVisible(loginPagePO.loginButton);
             waitUtil.waitForClickable(loginPagePO.loginButton).click();
             System.out.println("Clicked Login Button");

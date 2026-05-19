@@ -54,15 +54,17 @@ public class DashboardPageHelper extends BaseTest {
                 String price = waitUtil.waitForVisible(priceLocator).getText();
                 System.out.println("Verified product price: " + product + " | " + price);
 
-                waitUtil.waitForElementToDisappear(dashboardPagePO.itemAddedMessage);
                 waitUtil.scrollElementIntoView(button);
                 waitUtil.waitForVisible(button);
                 waitUtil.waitForClickable(button).click();
                 System.out.println("Clicked Add to Cart for product: " + product);
+                waitUtil.waitForElementToDisappear(dashboardPagePO.itemAddedMessage);
+                System.out.println("Added to cart message disappeared for previous product");
+                Thread.sleep(2000);
             }
-            waitUtil.waitForElementToDisappear(dashboardPagePO.itemAddedMessage);
-            waitUtil.scrollElementIntoView(dashboardPagePO.cartIcon);
+
             waitUtil.waitForHeaderToBeVisible();
+            waitUtil.scrollElementIntoView(dashboardPagePO.cartIcon);
             waitUtil.waitForVisible(dashboardPagePO.cartIcon);
             waitUtil.waitForClickable(dashboardPagePO.cartIcon).click();
             System.out.println("Clicked on Cart");

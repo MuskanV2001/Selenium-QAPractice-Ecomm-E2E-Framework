@@ -17,7 +17,7 @@ public class DashboardPagePO{
     public By sortDropdown = By.cssSelector("button[role='combobox']");
     public By highToLowOption = By.xpath("//div[@data-value='high']");
     public By alphabeticDescOption = By.xpath("//div[@data-value='dsc']");
-    public By cartIcon = By.xpath("//header//descendant::div[3]/span[1]");
+    public By cartIcon = By.cssSelector("header#ecommerce-header span:nth-child(1)");
     public By itemAddedMessage = By.xpath("//*[contains(text(),'Added to cart')]/ancestor::li");
     public By profileButton = By.xpath("//div[contains(@class,'profile')]/button/span[1]");
     public By logoutButton = By.xpath("//button/div[@role='menuitem']");
