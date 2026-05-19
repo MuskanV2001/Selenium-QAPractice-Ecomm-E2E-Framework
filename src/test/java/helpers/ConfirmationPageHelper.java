@@ -29,6 +29,7 @@ public class ConfirmationPageHelper extends BaseTest {
 
     public boolean clickContinueShopping(){
         try{
+            waitUtil.waitForVisible(confirmationPagePO.continueShoppingButton);
             waitUtil.waitForClickable(confirmationPagePO.continueShoppingButton).click();
             System.out.println("Clicked Continue Shopping button");
             return true;
