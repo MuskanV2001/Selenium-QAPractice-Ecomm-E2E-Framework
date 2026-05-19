@@ -27,6 +27,8 @@ public class BaseTest {
 
             String browser = prop.getProperty("browser");
             baseUrl = prop.getProperty("baseUrl");
+
+            // For Jenkins parameter in "clean test -DProfile=${Profile} -Dheadless=${headless}"
             String headless = System.getProperty("headless", "false");
 
             if(browser.equalsIgnoreCase("chrome")){

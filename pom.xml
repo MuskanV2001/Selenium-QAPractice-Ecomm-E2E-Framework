@@ -85,11 +85,6 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.5.4</version>
             <configuration>
-              <properties>
-                <property>
-                  <headless>true</headless>
-                </property>
-              </properties>
               <suiteXmlFiles>
                 <suiteXmlFile>E2E_Submit.xml</suiteXmlFile>
               </suiteXmlFiles>
