@@ -1,10 +1,8 @@
 package utils;
 
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DBConnectionUtils {
     private static Connection connection;
