@@ -34,8 +34,6 @@ public class MySQLQueryUtils {
             rowSet.close();
             sqlStmt.close();
 
-            DBConnectionUtils.closeConnection();
-
             return testData;
 
         }
