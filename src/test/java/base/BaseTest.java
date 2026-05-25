@@ -7,6 +7,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeMethod;
+import utils.ConfigPropertiesReader;
+import utils.DBConnectionUtils;
+import utils.MySQLQueryUtils;
 import utils.WaitUtils;
 import java.util.*;
 
@@ -21,12 +24,9 @@ public class BaseTest {
 
 
     public WebDriver initializeDriver(){
-        try(FileReader configReader = new FileReader(System.getProperty("user.dir")+"/src/test/java/resources/config.properties")){
-            Properties prop = new Properties();
-            prop.load(configReader);
-
-            String browser = prop.getProperty("browser");
-            baseUrl = prop.getProperty("baseUrl");
+        try{
+            String browser = ConfigPropertiesReader.getConfigProperty("browser");
+            baseUrl = ConfigPropertiesReader.getConfigProperty("baseUrl");
 
             // For Jenkins parameter in "clean test -DProfile=${Profile} -Dheadless=${headless}"
             String headless = System.getProperty("headless", "false");
