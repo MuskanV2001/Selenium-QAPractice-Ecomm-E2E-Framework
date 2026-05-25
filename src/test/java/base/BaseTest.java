@@ -13,15 +13,12 @@ import utils.MySQLQueryUtils;
 import utils.WaitUtils;
 import java.util.*;
 
-import java.io.FileReader;
-import java.util.Properties;
-
 public class BaseTest {
 
     protected static WebDriver driver;
     public static String baseUrl;
     public static WaitUtils waitUtil;
-
+    public static List<Map<Object,Object>> userTestData;
 
     public WebDriver initializeDriver(){
         try{
@@ -65,6 +62,7 @@ public class BaseTest {
             else if (browser.equalsIgnoreCase("edge")) driver = new EdgeDriver();
 
             waitUtil = new WaitUtils(driver);
+
         }
         catch (Exception e){
             System.out.println("Error reading config file: " + e.getMessage());
@@ -84,6 +82,8 @@ public class BaseTest {
         if (driver != null) {
             driver.quit();
         }
+        DBConnectionUtils.closeConnection();
         System.out.println("AFTER HOOK EXECUTED - TEAR DOWN");
     }
+
 }
