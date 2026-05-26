@@ -106,7 +106,7 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tear_down(){
         if (driver != null) {
             driver.quit();
