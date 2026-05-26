@@ -6,11 +6,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.BeforeMethod;
 import utils.ConfigPropertiesReader;
 import utils.DBConnectionUtils;
 import utils.MySQLQueryUtils;
 import utils.WaitUtils;
+
+import java.net.URL;
 import java.util.*;
 
 public class BaseTest {
@@ -27,6 +30,7 @@ public class BaseTest {
 
             // For Jenkins parameter in "clean test -DProfile=${Profile} -Dheadless=${headless}"
             String headless = System.getProperty("headless", "false");
+            String executionMode = System.getProperty("executionMode", "local");
 
             if(browser.equalsIgnoreCase("chrome")){
                 ChromeOptions options = new ChromeOptions();
@@ -56,7 +60,30 @@ public class BaseTest {
 
                 options.setExperimentalOption("prefs", prefs);
 
-                driver = new ChromeDriver(options);
+                // SauceLabs Execution Config
+                if(executionMode.equalsIgnoreCase("sauce")){
+
+                    String sauceLabsUrl = ConfigPropertiesReader.getConfigProperty("sauceLabsUrl");
+
+                    String sauceUser = System.getenv("SAUCE_USERNAME");
+                    String sauceKey = System.getenv("SAUCE_ACCESS_KEY");
+
+                    options.setPlatformName("Windows 11");
+                    options.setBrowserVersion("latest");
+                    Map<String, Object> sauceOptions = new HashMap<>();
+                    sauceOptions.put("username", sauceUser);
+                    sauceOptions.put("accessKey", sauceKey);
+                    sauceOptions.put("build", "selenium-testng-build");
+                    sauceOptions.put("name", "Selenium TestNG Test");
+                    options.setCapability("sauce:options", sauceOptions);
+
+                    System.out.println("Running on Sauce Labs...");
+
+                    driver = new RemoteWebDriver(new URL(sauceLabsUrl), options);
+                }
+                else{
+                    driver = new ChromeDriver(options);
+                }
             }
             else if (browser.equalsIgnoreCase("firefox")) driver = new FirefoxDriver();
             else if (browser.equalsIgnoreCase("edge")) driver = new EdgeDriver();
