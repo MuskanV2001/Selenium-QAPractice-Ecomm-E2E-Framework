@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name = "E2E_Ecommerce_Suite" >
+    <test name = "E2E_Ecommerce_Test">
+        <classes>
+            <class name = "tests.TestNGTestRunner"/>
+        </classes>
+    </test>
+</suite>

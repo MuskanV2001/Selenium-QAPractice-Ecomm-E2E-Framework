@@ -1,7 +1,7 @@
 Feature:  E2E_Placing Order_Transaction
 
   @E2E
-  Scenario Outline: E2E_Place Order
+  Scenario Outline: E2E_Place Order_Transaction: <firstname> <lastname> | <products_to_add>
     Given User is on the login page
     And User logins into the application using "<email>" and "<password>"
     And User lands on the Dashboard page to view items
