@@ -110,8 +110,10 @@ public class BaseTest {
         if (driver != null) {
             driver.quit();
         }
-        DBConnectionUtils.closeConnection();
         System.out.println("AFTER HOOK EXECUTED - TEAR DOWN");
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("FINISHED SCENARIO");
+        System.out.println("------------------------------------------------------------------------------------------");
     }
 
 }
