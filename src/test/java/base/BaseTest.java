@@ -99,22 +99,15 @@ public class BaseTest {
         return driver;
     }
 
+
     @BeforeMethod(alwaysRun = true)
     public void launchApp(){
         driver = initializeDriver();
         driver.get(baseUrl);
         driver.manage().window().maximize();
+        System.out.println("\nLAUNCHING APP...");
+        System.out.println("Base URL: " + baseUrl + "\n");
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tear_down(){
-        if (driver != null) {
-            driver.quit();
-        }
-        System.out.println("AFTER HOOK EXECUTED - TEAR DOWN");
-        System.out.println("------------------------------------------------------------------------------------------");
-        System.out.println("FINISHED SCENARIO");
-        System.out.println("------------------------------------------------------------------------------------------");
-    }
 
 }
