@@ -1,4 +1,4 @@
-name: Selenium QA Practie Ecommerce E2E Tests
+name: Selenium QA Practice Ecommerce E2E Tests
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Execute the tests
-      run: mvn clean test -DProfile=e2e -Dheadless=true
+      run: mvn clean test -DProfile=e2etest -Dheadless=true
     - name: Publish Test Reports
       if: always()
       uses: dorny/test-reporter@v1
