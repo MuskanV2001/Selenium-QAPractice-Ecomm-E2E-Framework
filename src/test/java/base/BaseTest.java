@@ -77,7 +77,8 @@ public class BaseTest {
                     sauceOptions.put("name", "Selenium TestNG Test");
                     options.setCapability("sauce:options", sauceOptions);
 
-                    System.out.println("Running on Sauce Labs...");
+                    System.out.println("\nRunning on Sauce Labs...");
+                    System.out.println("Sauce Labs: " + sauceLabsUrl);
 
                     driver = new RemoteWebDriver(new URL(sauceLabsUrl), options);
                 }
