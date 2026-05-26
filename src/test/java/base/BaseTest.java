@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utils.ConfigPropertiesReader;
 import utils.DBConnectionUtils;
@@ -105,7 +106,7 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-    @After
+    @AfterMethod
     public void tear_down(){
         if (driver != null) {
             driver.quit();
