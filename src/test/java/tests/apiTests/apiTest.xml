@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name = "API Test Suite">
+    <test name = "Network Interception Test">
+        <parameter name="apiBaseUrl" value="https://rahulshettyacademy.com/api"/>
+        <classes>
+            <class name = "tests.apiTests.API_Interception"/>
+        </classes>
+    </test>
+    <test name = "File Upload Test">
+        <parameter name="apiBaseUrl" value="https://api.escuelajs.co/api/v1"/>
+        <classes>
+            <class name = "tests.apiTests.API_FileUpload"/>
+        </classes>
+    </test>
+</suite>

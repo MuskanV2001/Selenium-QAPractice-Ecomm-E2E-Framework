@@ -2,7 +2,6 @@ package hooks;
 
 import base.BaseTest;
 import io.cucumber.java.*;
-import org.testng.annotations.BeforeMethod;
 
 public class CucumberHooks extends BaseTest{
 
