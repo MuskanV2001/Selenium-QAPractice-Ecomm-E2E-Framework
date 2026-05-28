@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name = "Ecommerce UI and API Full Tests">
+    <test name = "UI E2E Validation">
+        <classes>
+            <class name="tests.TestNGTestRunner"/>
+        </classes>
+    </test>
+    <test name = "API Network Interception Test">
+        <parameter name="apiBaseUrl" value="https://rahulshettyacademy.com/api"/>
+        <classes>
+            <class name = "tests.apiTests.API_Interception"/>
+        </classes>
+    </test>
+    <test name = "API File Upload Test">
+        <parameter name="apiBaseUrl" value="https://api.escuelajs.co/api/v1"/>
+        <classes>
+            <class name = "tests.apiTests.API_FileUpload"/>
+        </classes>
+    </test>
+</suite>

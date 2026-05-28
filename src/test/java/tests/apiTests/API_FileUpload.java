@@ -22,7 +22,7 @@ public class API_FileUpload {
 
     @BeforeMethod
     public void consolePrint(){
-        System.out.println("\n----------------------------------- NEW TEST STARTED -----------------------------------\n");
+        System.out.println("\n----------------------------------- NEW API TEST STARTED -----------------------------------\n");
     }
 
     @Test(description = "File Uploading Test")

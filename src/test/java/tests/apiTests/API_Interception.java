@@ -26,7 +26,7 @@ public class API_Interception {
 
     @BeforeMethod
     public void consolePrint(){
-        System.out.println("\n----------------------------------- NEW TEST STARTED -----------------------------------\n");
+        System.out.println("\n----------------------------------- NEW API TEST STARTED -----------------------------------\n");
     }
 
     @Test
