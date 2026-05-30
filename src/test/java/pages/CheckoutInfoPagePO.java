@@ -1,15 +1,8 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class CheckoutInfoPagePO {
-
-    private WebDriver driver;
-
-    public CheckoutInfoPagePO(WebDriver driver){
-        this.driver = driver;
-    }
 
     public By pageTitle = By.xpath("//h3[text()='Checkout: Your Information']");
     public By firstNameInput = By.xpath("//label[text()='First Name']/following-sibling::input");

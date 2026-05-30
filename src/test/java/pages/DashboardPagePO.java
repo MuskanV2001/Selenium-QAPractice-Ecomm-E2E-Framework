@@ -1,17 +1,8 @@
 package pages;
 
-import base.BaseTest;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class DashboardPagePO{
-
-    private WebDriver driver;
-
-    public DashboardPagePO(WebDriver driver){
-        this.driver = driver;
-    }
 
     public By pageTitle = By.xpath("//h3[text()='Products']");
     public By sortDropdown = By.cssSelector("button[role='combobox']");

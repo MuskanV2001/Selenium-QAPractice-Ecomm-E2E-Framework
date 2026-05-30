@@ -1,15 +1,8 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class CheckoutReviewPagePO {
-
-    private WebDriver driver;
-
-    public CheckoutReviewPagePO(WebDriver driver){
-        this.driver = driver;
-    }
 
     public By pageTitle = By.xpath("//h3[text()=\"Checkout: Overview\"]");
     public By paymentInfoHeader = By.xpath("//h4[text()=\"Payment Information:\"]");

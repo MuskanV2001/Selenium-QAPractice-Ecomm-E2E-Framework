@@ -5,20 +5,20 @@ import pages.ConfirmationPagePO;
 
 public class ConfirmationPageHelper extends BaseTest {
 
-    ConfirmationPagePO confirmationPagePO;
+    private ConfirmationPagePO confirmationPagePO;
 
     public ConfirmationPageHelper(){
-        confirmationPagePO = new ConfirmationPagePO(driver);
+        confirmationPagePO = new ConfirmationPagePO();
     }
 
     public boolean verifyOrderConfirmation(){
         try{
-            waitUtil.waitForVisible(confirmationPagePO.pageTitle);
-            System.out.println("Verified Confirmation Page: " + waitUtil.waitForClickable(confirmationPagePO.pageTitle).getText());
-            waitUtil.waitForVisible(confirmationPagePO.confirmationMessage);
-            System.out.println("Verified Confirmation Message: " + waitUtil.waitForVisible(confirmationPagePO.confirmationMessage).getText());
-            waitUtil.waitForVisible(confirmationPagePO.infoMessage);
-            System.out.println("Verified Informational Message: " + waitUtil.waitForVisible(confirmationPagePO.infoMessage).getText());
+            getWaitUtil().waitForVisible(confirmationPagePO.pageTitle);
+            System.out.println("Verified Confirmation Page: " + getWaitUtil().waitForClickable(confirmationPagePO.pageTitle).getText());
+            getWaitUtil().waitForVisible(confirmationPagePO.confirmationMessage);
+            System.out.println("Verified Confirmation Message: " + getWaitUtil().waitForVisible(confirmationPagePO.confirmationMessage).getText());
+            getWaitUtil().waitForVisible(confirmationPagePO.infoMessage);
+            System.out.println("Verified Informational Message: " + getWaitUtil().waitForVisible(confirmationPagePO.infoMessage).getText());
             return true;
         }
         catch (Exception e){
@@ -29,8 +29,8 @@ public class ConfirmationPageHelper extends BaseTest {
 
     public boolean clickContinueShopping(){
         try{
-            waitUtil.waitForVisible(confirmationPagePO.continueShoppingButton);
-            waitUtil.waitForClickable(confirmationPagePO.continueShoppingButton).click();
+            getWaitUtil().waitForVisible(confirmationPagePO.continueShoppingButton);
+            getWaitUtil().waitForClickable(confirmationPagePO.continueShoppingButton).click();
             System.out.println("Clicked Continue Shopping button");
             return true;
         }

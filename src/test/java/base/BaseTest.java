@@ -1,113 +1,76 @@
 package base;
 
-import io.cucumber.java.After;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import utils.BrowserDriverManager;
 import utils.ConfigPropertiesReader;
-import utils.DBConnectionUtils;
-import utils.MySQLQueryUtils;
 import utils.WaitUtils;
 
-import java.net.URL;
 import java.util.*;
 
 public class BaseTest {
 
-    protected static WebDriver driver;
-    public static String baseUrl;
-    public static WaitUtils waitUtil;
-    public static List<Map<Object,Object>> userTestData;
+    private static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<WaitUtils> waitUtilThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<BrowserDriverManager> browserDriverManagerThreadLocal = new ThreadLocal<>();
+
+    // Protected accessors for subclasses
+    public static WebDriver getDriver() {
+        return driverThreadLocal.get();
+    }
+
+    public static WaitUtils getWaitUtil() {
+        return waitUtilThreadLocal.get();
+    }
 
     public WebDriver initializeDriver(){
         try{
-            String browser = ConfigPropertiesReader.getConfigProperty("browser");
-            baseUrl = ConfigPropertiesReader.getConfigProperty("baseUrl");
-
-            // For Jenkins parameter in "clean test -DProfile=${Profile} -Dheadless=${headless}"
-            String headless = System.getProperty("headless", "false");
-            String executionMode = System.getProperty("executionMode", "local");
-
-            if(browser.equalsIgnoreCase("chrome")){
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--disable-notifications");
-                options.addArguments("--disable-save-password-bubble");
-                options.addArguments("--disable-infobars");
-                options.addArguments("--disable-extensions");
-                options.addArguments("--disable-dev-shm-usage");
-                options.addArguments("--no-sandbox");
-                options.addArguments("--disable-gpu");
-
-                // Disable password manager
-                options.addArguments("--disable-features=PasswordLeakDetection");
-
-                if(headless.equalsIgnoreCase("true")) {
-                    options.addArguments("--headless=new");
-                    options.addArguments("--window-size=1920,1080");
-                    options.addArguments("--start-maximized");
-                    System.out.println("Running in headless mode");
-                }
-
-                Map<String, Object> prefs = new HashMap<>();
-                prefs.put("credentials_enable_service", false);
-                prefs.put("profile.password_manager_enabled", false);
-                prefs.put("profile.password_manager_leak_detection", false);
-                prefs.put("profile.default_content_setting_values.notifications", 2);
-
-                options.setExperimentalOption("prefs", prefs);
-
-                // SauceLabs Execution Config
-                if(executionMode.equalsIgnoreCase("sauce")){
-
-                    String sauceLabsUrl = ConfigPropertiesReader.getConfigProperty("sauceLabsUrl");
-
-                    String sauceUser = System.getenv("SAUCE_USERNAME");
-                    String sauceKey = System.getenv("SAUCE_ACCESS_KEY");
-
-                    options.setPlatformName("Windows 11");
-                    options.setBrowserVersion("latest");
-                    Map<String, Object> sauceOptions = new HashMap<>();
-                    sauceOptions.put("username", sauceUser);
-                    sauceOptions.put("accessKey", sauceKey);
-                    sauceOptions.put("build", "selenium-testng-build");
-                    sauceOptions.put("name", "Selenium TestNG Test");
-                    options.setCapability("sauce:options", sauceOptions);
-
-                    System.out.println("\nRunning on Sauce Labs...");
-                    System.out.println("Sauce Labs: " + sauceLabsUrl);
-
-                    driver = new RemoteWebDriver(new URL(sauceLabsUrl), options);
-                }
-                else{
-                    driver = new ChromeDriver(options);
-                }
+            if (getDriver() != null) {
+                return getDriver();
             }
-            else if (browser.equalsIgnoreCase("firefox")) driver = new FirefoxDriver();
-            else if (browser.equalsIgnoreCase("edge")) driver = new EdgeDriver();
+            // Setting up Browser Driver Manager
+            BrowserDriverManager browserDriverManager = new BrowserDriverManager();
+            browserDriverManagerThreadLocal.set(browserDriverManager);
+            WebDriver webDriver = browserDriverManager.getBrowserDriver();
 
-            waitUtil = new WaitUtils(driver);
+            // Setting up Driver for each thread
+            driverThreadLocal.set(webDriver);
 
+            // Setting up wait util for each thread
+            waitUtilThreadLocal.set(new WaitUtils(webDriver));
         }
         catch (Exception e){
-            System.out.println("Error reading config file: " + e.getMessage());
+            System.out.println("Error initializing driver: " + e.getMessage());
         }
-        return driver;
+        return getDriver();
     }
 
-
-    @BeforeMethod(alwaysRun = true)
     public void launchApp(){
-        driver = initializeDriver();
-        driver.get(baseUrl);
-        driver.manage().window().maximize();
-        System.out.println("\nLAUNCHING APP...");
+        initializeDriver();
+        String baseUrl = ConfigPropertiesReader.getConfigProperty("baseUrl");
+        getDriver().get(baseUrl);
+        getDriver().manage().window().maximize();
+        System.out.println("\nLAUNCHING APP FOR THREAD: " + Thread.currentThread().getId());
         System.out.println("Base URL: " + baseUrl + "\n");
     }
 
+    @AfterMethod(alwaysRun = true)
+    public void tearDown(){
+        try {
+            if (browserDriverManagerThreadLocal.get() != null) {
+                browserDriverManagerThreadLocal.get().quitBrowserDriver();
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Error during tearDown: " + e.getMessage());
+        }
+        finally {
+            driverThreadLocal.remove();
+            waitUtilThreadLocal.remove();
+            browserDriverManagerThreadLocal.remove();
+        }
+        System.out.println("\nTEARDOWN EXECUTING FOR THREAD: " + Thread.currentThread().getId() + "\n");
+    }
 
 }

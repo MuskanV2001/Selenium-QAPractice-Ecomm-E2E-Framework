@@ -2,19 +2,20 @@ package helpers;
 
 import base.BaseTest;
 import pages.CheckoutInfoPagePO;
+import pages.CheckoutReviewPagePO;
 
 public class CheckoutInfoPageHelper extends BaseTest {
 
-    CheckoutInfoPagePO checkoutInfoPagePO;
+    private CheckoutInfoPagePO checkoutInfoPagePO;
 
     public CheckoutInfoPageHelper(){
-        checkoutInfoPagePO = new CheckoutInfoPagePO(driver);
+        checkoutInfoPagePO = new CheckoutInfoPagePO();
     }
 
     public boolean verifyCheckoutInfoPage(){
         try{
-            waitUtil.waitForVisible(checkoutInfoPagePO.pageTitle);
-            System.out.println("Verified Checkout Information Page: " + waitUtil.waitForVisible(checkoutInfoPagePO.pageTitle).getText());
+            getWaitUtil().waitForVisible(checkoutInfoPagePO.pageTitle);
+            System.out.println("Verified Checkout Information Page: " + getWaitUtil().waitForVisible(checkoutInfoPagePO.pageTitle).getText());
             return true;
         }
         catch (Exception e){
@@ -25,15 +26,15 @@ public class CheckoutInfoPageHelper extends BaseTest {
 
     public boolean enterUserDetails(String firstname, String lastname){
         try{
-            waitUtil.waitForVisible(checkoutInfoPagePO.firstNameInput).sendKeys(firstname);
+            getWaitUtil().waitForVisible(checkoutInfoPagePO.firstNameInput).sendKeys(firstname);
             System.out.println("Entered user's firstname: " + firstname);
-            waitUtil.waitForVisible(checkoutInfoPagePO.lastNameInput).sendKeys(lastname);
+            getWaitUtil().waitForVisible(checkoutInfoPagePO.lastNameInput).sendKeys(lastname);
             System.out.println("Entered user's lastname: " + lastname);
-            waitUtil.waitForVisible(checkoutInfoPagePO.zipcodeInput);
+            getWaitUtil().waitForVisible(checkoutInfoPagePO.zipcodeInput);
             System.out.println("ZipCode displayed");
-            waitUtil.scrollElementIntoView(checkoutInfoPagePO.continueButton);
-            waitUtil.waitForVisible(checkoutInfoPagePO.continueButton);
-            waitUtil.waitForClickable(checkoutInfoPagePO.continueButton).click();
+            getWaitUtil().scrollElementIntoView(checkoutInfoPagePO.continueButton);
+            getWaitUtil().waitForVisible(checkoutInfoPagePO.continueButton);
+            getWaitUtil().waitForClickable(checkoutInfoPagePO.continueButton).click();
             System.out.println("Clicked Continue button");
             return true;
         }

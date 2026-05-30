@@ -5,16 +5,16 @@ import pages.CheckoutReviewPagePO;
 
 public class   CheckoutReviewPageHelper extends BaseTest {
 
-    CheckoutReviewPagePO checkoutReviewPagePO;
+    private CheckoutReviewPagePO checkoutReviewPagePO;
 
     public CheckoutReviewPageHelper(){
-        checkoutReviewPagePO = new CheckoutReviewPagePO(driver);
+        checkoutReviewPagePO = new CheckoutReviewPagePO();
     }
 
     public boolean verifyCheckoutReviewPage(){
         try{
-            waitUtil.waitForVisible(checkoutReviewPagePO.pageTitle);
-            System.out.println("Verified Checkout Review Page: " + waitUtil.waitForVisible(checkoutReviewPagePO.pageTitle).getText());
+            getWaitUtil().waitForVisible(checkoutReviewPagePO.pageTitle);
+            System.out.println("Verified Checkout Review Page: " + getWaitUtil().waitForVisible(checkoutReviewPagePO.pageTitle).getText());
             return true;
         }
         catch (Exception e){
@@ -25,22 +25,22 @@ public class   CheckoutReviewPageHelper extends BaseTest {
 
     public boolean verifyOrderDetails(){
         try{
-            waitUtil.waitForVisible(checkoutReviewPagePO.paymentInfoHeader);
+            getWaitUtil().waitForVisible(checkoutReviewPagePO.paymentInfoHeader);
             System.out.println("Verified Payment Info Header");
-            waitUtil.waitForVisible(checkoutReviewPagePO.paymentInfo);
-            System.out.println("Verified Payment Info: " + waitUtil.waitForVisible(checkoutReviewPagePO.paymentInfo).getText());
-            waitUtil.waitForVisible(checkoutReviewPagePO.shippingInfoHeader);
+            getWaitUtil().waitForVisible(checkoutReviewPagePO.paymentInfo);
+            System.out.println("Verified Payment Info: " + getWaitUtil().waitForVisible(checkoutReviewPagePO.paymentInfo).getText());
+            getWaitUtil().waitForVisible(checkoutReviewPagePO.shippingInfoHeader);
             System.out.println("Verified Shipping Info Header");
-            waitUtil.waitForVisible(checkoutReviewPagePO.shippingInfo);
-            System.out.println("Verified Shipping Info: " + waitUtil.waitForVisible(checkoutReviewPagePO.shippingInfo).getText());
-            waitUtil.waitForVisible(checkoutReviewPagePO.priceTotalHeader);
+            getWaitUtil().waitForVisible(checkoutReviewPagePO.shippingInfo);
+            System.out.println("Verified Shipping Info: " + getWaitUtil().waitForVisible(checkoutReviewPagePO.shippingInfo).getText());
+            getWaitUtil().waitForVisible(checkoutReviewPagePO.priceTotalHeader);
             System.out.println("Verified Price Total Header");
-            waitUtil.waitForVisible(checkoutReviewPagePO.itemTotal);
-            System.out.println("Verified Item Total amount: " + waitUtil.waitForVisible(checkoutReviewPagePO.itemTotal).getText());
-            waitUtil.waitForVisible(checkoutReviewPagePO.taxAmount);
-            System.out.println("Verified tax amount: " + waitUtil.waitForVisible(checkoutReviewPagePO.taxAmount).getText());
-            waitUtil.waitForVisible(checkoutReviewPagePO.totalAmount);
-            System.out.println("Verified total amount: " + waitUtil.waitForVisible(checkoutReviewPagePO.totalAmount).getText());
+            getWaitUtil().waitForVisible(checkoutReviewPagePO.itemTotal);
+            System.out.println("Verified Item Total amount: " + getWaitUtil().waitForVisible(checkoutReviewPagePO.itemTotal).getText());
+            getWaitUtil().waitForVisible(checkoutReviewPagePO.taxAmount);
+            System.out.println("Verified tax amount: " + getWaitUtil().waitForVisible(checkoutReviewPagePO.taxAmount).getText());
+            getWaitUtil().waitForVisible(checkoutReviewPagePO.totalAmount);
+            System.out.println("Verified total amount: " + getWaitUtil().waitForVisible(checkoutReviewPagePO.totalAmount).getText());
             return true;
         }
         catch (Exception e){
@@ -51,9 +51,9 @@ public class   CheckoutReviewPageHelper extends BaseTest {
 
     public boolean finishToSubmit(){
         try{
-            waitUtil.scrollElementIntoView(checkoutReviewPagePO.finishButton);
-            waitUtil.waitForVisible(checkoutReviewPagePO.finishButton);
-            waitUtil.waitForClickable(checkoutReviewPagePO.finishButton).click();
+            getWaitUtil().scrollElementIntoView(checkoutReviewPagePO.finishButton);
+            getWaitUtil().waitForVisible(checkoutReviewPagePO.finishButton);
+            getWaitUtil().waitForClickable(checkoutReviewPagePO.finishButton).click();
             System.out.println("Clicked Finish to submit order");
             return true;
         }

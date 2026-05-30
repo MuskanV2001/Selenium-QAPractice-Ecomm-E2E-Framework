@@ -6,10 +6,10 @@ import org.testng.Assert;
 
 public class ConfirmationPageSteps {
 
-    ConfirmationPageHelper confirmationPageHelper;
+    private ConfirmationPageHelper confirmationPageHelper;
 
     public ConfirmationPageSteps(){
-        this.confirmationPageHelper = new ConfirmationPageHelper();
+        confirmationPageHelper = new ConfirmationPageHelper();
     }
 
     @Then("User is navigated to the Order Confirmation Page")

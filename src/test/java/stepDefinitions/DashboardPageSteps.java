@@ -7,13 +7,14 @@ import org.testng.Assert;
 
 public class DashboardPageSteps {
 
-    DashboardPageHelper dashboardPageHelper;
-    LoginPageHelper loginPageHelper;
+    private DashboardPageHelper dashboardPageHelper;
+    private LoginPageHelper loginPageHelper;
 
     public DashboardPageSteps(){
-        this.dashboardPageHelper = new DashboardPageHelper();
-        this.loginPageHelper = new LoginPageHelper();
+        dashboardPageHelper = new DashboardPageHelper();
+        loginPageHelper = new LoginPageHelper();
     }
+
     @And("User lands on the Dashboard page to view items")
     public void user_lands_on_dashboard_to_view_items(){
         Assert.assertTrue(dashboardPageHelper.verifyDashboardPage());

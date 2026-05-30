@@ -5,15 +5,15 @@ import pages.CartPagePO;
 
 public class CartPageHelper extends BaseTest {
 
-    CartPagePO cartPagePO;
+    private CartPagePO cartPagePO;
 
     public CartPageHelper(){
-        this.cartPagePO = new CartPagePO(driver);
+        cartPagePO = new CartPagePO();
     }
     public boolean verifyCartItems(String products_To_Add){
         try{
-            waitUtil.waitForVisible(cartPagePO.pageTitle);
-            System.out.println("Verified Cart Page: " + waitUtil.waitForVisible(cartPagePO.pageTitle).getText());
+            getWaitUtil().waitForVisible(cartPagePO.pageTitle);
+            System.out.println("Verified Cart Page: " + getWaitUtil().waitForVisible(cartPagePO.pageTitle).getText());
             String[] products = products_To_Add.split(",");
             for(String product: products){
                 cartPagePO.getProductLocator(product);
@@ -32,9 +32,9 @@ public class CartPageHelper extends BaseTest {
 
     public boolean clickCheckoutButton(){
         try{
-            waitUtil.scrollElementIntoView(cartPagePO.checkoutButton);
-            waitUtil.waitForVisible(cartPagePO.checkoutButton);
-            waitUtil.waitForClickable(cartPagePO.checkoutButton).click();
+            getWaitUtil().scrollElementIntoView(cartPagePO.checkoutButton);
+            getWaitUtil().waitForVisible(cartPagePO.checkoutButton);
+            getWaitUtil().waitForClickable(cartPagePO.checkoutButton).click();
             System.out.println("Clicked Checkout Button");
             return true;
         }

@@ -6,10 +6,10 @@ import org.testng.Assert;
 
 public class CartPageSteps {
 
-    CartPageHelper cartPageHelper;
+    private CartPageHelper cartPageHelper;
 
     public CartPageSteps(){
-        this.cartPageHelper = new CartPageHelper();
+        cartPageHelper = new CartPageHelper();
     }
 
     @And("User opens the cart to verify {string} items on Cart page")

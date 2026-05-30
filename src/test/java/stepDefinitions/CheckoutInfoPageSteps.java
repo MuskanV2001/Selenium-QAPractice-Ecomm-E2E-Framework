@@ -6,10 +6,10 @@ import org.testng.Assert;
 
 public class CheckoutInfoPageSteps {
 
-    CheckoutInfoPageHelper checkoutInfoPageHelper;
+    private CheckoutInfoPageHelper checkoutInfoPageHelper;
 
     public CheckoutInfoPageSteps(){
-        this.checkoutInfoPageHelper = new CheckoutInfoPageHelper();
+        checkoutInfoPageHelper = new CheckoutInfoPageHelper();
     }
 
     @And("User navigates to the Checkout information details page to enter {string},{string}")

@@ -5,28 +5,17 @@ import pages.LoginPagePO;
 
 public class LoginPageHelper extends BaseTest {
 
-    LoginPagePO loginPagePO;
+    private LoginPagePO loginPagePO;
 
     public LoginPageHelper(){
-        this.loginPagePO = new LoginPagePO(driver);
-    }
-
-    public boolean launchApplication(){
-        try{
-            launchApp();
-            return true;
-        }
-        catch (Exception e){
-            System.out.println("Error launching Application: " + e.getMessage());
-            return false;
-        }
+        loginPagePO = new LoginPagePO();
     }
 
     public boolean verifyLoginPage(){
         try {
-            waitUtil.waitForVisible(loginPagePO.pageLogo);
+            getWaitUtil().waitForVisible(loginPagePO.pageLogo);
             System.out.println("Verified Login Page Logo");
-            waitUtil.waitForVisible(loginPagePO.pageTitle);
+            getWaitUtil().waitForVisible(loginPagePO.pageTitle);
             System.out.println("Verified Login Page Title");
             return true;
         }
@@ -38,14 +27,14 @@ public class LoginPageHelper extends BaseTest {
 
     public boolean login(String email, String password){
         try{
-            waitUtil.waitForVisible(loginPagePO.emailInput).sendKeys(email);
+            getWaitUtil().waitForVisible(loginPagePO.emailInput).sendKeys(email);
             System.out.println("Entered email id: " + email);
-            waitUtil.waitForVisible(loginPagePO.passwordInput).sendKeys(password);
+            getWaitUtil().waitForVisible(loginPagePO.passwordInput).sendKeys(password);
             System.out.println("Entered password: " + password);
             Thread.sleep(1000);
-            waitUtil.scrollElementIntoView(loginPagePO.loginButton);
-            waitUtil.waitForVisible(loginPagePO.loginButton);
-            waitUtil.waitForClickable(loginPagePO.loginButton).click();
+            getWaitUtil().scrollElementIntoView(loginPagePO.loginButton);
+            getWaitUtil().waitForVisible(loginPagePO.loginButton);
+            getWaitUtil().waitForClickable(loginPagePO.loginButton).click();
             System.out.println("Clicked Login Button");
             return true;
         }

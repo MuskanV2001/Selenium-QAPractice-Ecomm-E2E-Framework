@@ -1,21 +1,19 @@
 package stepDefinitions;
 
 import helpers.LoginPageHelper;
-import io.cucumber.java.bs.A;
 import io.cucumber.java.en.*;
 import org.testng.Assert;
 
 public class LoginPageSteps {
 
-    LoginPageHelper loginPageHelper;
+    private LoginPageHelper loginPageHelper;
 
     public LoginPageSteps(){
-        this.loginPageHelper = new LoginPageHelper();
+        loginPageHelper = new LoginPageHelper();
     }
 
     @Given("^User is on the login page$")
     public void user_on_login_page(){
-        Assert.assertTrue(loginPageHelper.launchApplication());
         Assert.assertTrue(loginPageHelper.verifyLoginPage());
     }
 

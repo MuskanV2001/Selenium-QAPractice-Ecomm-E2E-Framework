@@ -1,15 +1,8 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class LoginPagePO {
-
-    private WebDriver driver;
-
-    public LoginPagePO(WebDriver driver){
-        this.driver = driver;
-    }
 
     public By pageLogo = By.xpath("//header[@id='ecommerce-header']//img");
     public By pageTitle = By.xpath("//h2[text()='Login']");

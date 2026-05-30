@@ -6,16 +6,16 @@ import pages.DashboardPagePO;
 
 public class DashboardPageHelper extends BaseTest {
 
-    DashboardPagePO dashboardPagePO;
+    private DashboardPagePO dashboardPagePO;
 
     public DashboardPageHelper(){
-        dashboardPagePO = new DashboardPagePO(driver);
+        dashboardPagePO = new DashboardPagePO();
     }
 
     public boolean verifyDashboardPage(){
         try{
-            waitUtil.waitForVisible(dashboardPagePO.pageTitle);
-            System.out.println("Verified Dashboard Page: " + waitUtil.waitForVisible(dashboardPagePO.pageTitle).getText());
+            getWaitUtil().waitForVisible(dashboardPagePO.pageTitle);
+            System.out.println("Verified Dashboard Page: " + getWaitUtil().waitForVisible(dashboardPagePO.pageTitle).getText());
             return true;
         }
         catch (Exception e){
@@ -26,11 +26,11 @@ public class DashboardPageHelper extends BaseTest {
 
     public boolean verifySorting(){
         try{
-            waitUtil.waitForClickable(dashboardPagePO.sortDropdown).click();
-            waitUtil.waitForClickable(dashboardPagePO.alphabeticDescOption).click();
+            getWaitUtil().waitForClickable(dashboardPagePO.sortDropdown).click();
+            getWaitUtil().waitForClickable(dashboardPagePO.alphabeticDescOption).click();
             System.out.println("Verified Alphabetic Sorting Option");
-            waitUtil.waitForClickable(dashboardPagePO.sortDropdown).click();
-            waitUtil.waitForClickable(dashboardPagePO.highToLowOption).click();
+            getWaitUtil().waitForClickable(dashboardPagePO.sortDropdown).click();
+            getWaitUtil().waitForClickable(dashboardPagePO.highToLowOption).click();
             System.out.println("Verified High To Low Sorting Option");
             return true;
         }
@@ -48,25 +48,25 @@ public class DashboardPageHelper extends BaseTest {
                 By priceLocator = dashboardPagePO.getProductPriceLocator(product);
                 By button = dashboardPagePO.getAddToCartButtonLocator(product);
 
-                waitUtil.waitForVisible(name);
+                getWaitUtil().waitForVisible(name);
                 System.out.println("Verified product name");
 
-                String price = waitUtil.waitForVisible(priceLocator).getText();
+                String price = getWaitUtil().waitForVisible(priceLocator).getText();
                 System.out.println("Verified product price: " + product + " | " + price);
 
-                waitUtil.scrollElementIntoView(button);
-                waitUtil.waitForVisible(button);
-                waitUtil.waitForClickable(button).click();
+                getWaitUtil().scrollElementIntoView(button);
+                getWaitUtil().waitForVisible(button);
+                getWaitUtil().waitForClickable(button).click();
                 System.out.println("Clicked Add to Cart for product: " + product);
-                waitUtil.waitForElementToDisappear(dashboardPagePO.itemAddedMessage);
+                getWaitUtil().waitForElementToDisappear(dashboardPagePO.itemAddedMessage);
                 System.out.println("Added to cart message disappeared for previous product");
                 Thread.sleep(2000);
             }
 
-            waitUtil.waitForHeaderToBeVisible();
-            waitUtil.scrollElementIntoView(dashboardPagePO.cartIcon);
-            waitUtil.waitForVisible(dashboardPagePO.cartIcon);
-            waitUtil.waitForClickable(dashboardPagePO.cartIcon).click();
+            getWaitUtil().waitForHeaderToBeVisible();
+            getWaitUtil().scrollElementIntoView(dashboardPagePO.cartIcon);
+            getWaitUtil().waitForVisible(dashboardPagePO.cartIcon);
+            getWaitUtil().waitForClickable(dashboardPagePO.cartIcon).click();
             System.out.println("Clicked on Cart");
             return true;
         }
@@ -78,15 +78,15 @@ public class DashboardPageHelper extends BaseTest {
 
     public boolean logout(){
         try{
-            waitUtil.waitForHeaderToBeVisible();
-            waitUtil.waitForVisible(dashboardPagePO.profileButton);
-            waitUtil.waitForClickable(dashboardPagePO.profileButton).click();
+            getWaitUtil().waitForHeaderToBeVisible();
+            getWaitUtil().waitForVisible(dashboardPagePO.profileButton);
+            getWaitUtil().waitForClickable(dashboardPagePO.profileButton).click();
             System.out.println("Clicked Profile button");
-            waitUtil.waitForVisible(dashboardPagePO.logoutButton);
-            waitUtil.waitForClickable(dashboardPagePO.logoutButton).click();
+            getWaitUtil().waitForVisible(dashboardPagePO.logoutButton);
+            getWaitUtil().waitForClickable(dashboardPagePO.logoutButton).click();
             System.out.println("Clicked Logout Button");
-            waitUtil.waitForVisible(dashboardPagePO.logoutButtonPopup);
-            waitUtil.waitForClickable(dashboardPagePO.logoutButtonPopup).click();
+            getWaitUtil().waitForVisible(dashboardPagePO.logoutButtonPopup);
+            getWaitUtil().waitForClickable(dashboardPagePO.logoutButtonPopup).click();
             System.out.println("Clicked Logout Confirm button");
             return true;
         }

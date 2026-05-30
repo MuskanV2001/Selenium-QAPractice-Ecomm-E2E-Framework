@@ -122,6 +122,12 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.5.4</version>
             <configuration>
+              <properties>
+                <property>
+                  <name>dataproviderthreadcount</name>
+                  <value>3</value>
+                </property>
+              </properties>
               <suiteXmlFiles>
                 <suiteXmlFile>src/test/java/tests/testng.xml</suiteXmlFile>
               </suiteXmlFiles>
